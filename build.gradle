@@ -6,13 +6,16 @@ plugins {
 group = 'io.neskdev.api'
 version = '1.0-SNAPSHOT'
 
-
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
+tasks.withType(JavaCompile).configureEach {
+    options.release.set(17)
+    options.encoding = 'UTF-8'
+}
 
 repositories {
     mavenCentral()
@@ -20,17 +23,16 @@ repositories {
 }
 
 dependencies {
-    // lombok
+    // Lombok
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
     testCompileOnly 'org.projectlombok:lombok:1.18.30'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
 
-    // databases
+    // Databases
     implementation 'org.mongodb:mongodb-driver-sync:4.11.1'
     implementation 'redis.clients:jedis:4.4.3'
-
 }
 
 test {
@@ -49,8 +51,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/NerionMC/NerionAPI")
             credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
-                password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
+                username = findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+                password = findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
             }
         }
     }
