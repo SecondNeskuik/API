@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public interface MaintenanceSystem {
 
-    void isMaintenance();
+    boolean isMaintenance();
     void setMaintenance(boolean status);
     void addAllowedPlayer(UUID uuid);
     void removeAllowedPlayer(UUID uuid);
