@@ -1,11 +1,13 @@
 package io.neskdev.api.database;
 
+import java.util.UUID;
+
 public interface MaintenanceSystem {
 
     void isMaintenance();
-    void setMaintenance();
-    void addAllowedPlayer();
-    void removeAllowedPlayer();
-    boolean isAllowed();
+    void setMaintenance(boolean status);
+    void addAllowedPlayer(UUID uuid);
+    void removeAllowedPlayer(UUID uuid);
+    boolean isAllowed(UUID uuid);
 
 }
